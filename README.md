@@ -27,6 +27,12 @@ LLM security testing is stuck in 2024. Current tools fire static payload lists a
 
 Phantom is an **autonomous red-team agent** with a policy network that learns which attack strategies work against your specific target. It runs multi-turn social engineering chains, mutates prompts to evade filters, and produces compliance-ready reports mapped to MITRE ATLAS.
 
+## Showcase
+
+![Rendered Phantom HTML report](assets/report-screenshot.png)
+
+*HTML finding report generated directly from the local demo pipeline.*
+
 ## Quick Start
 
 ### Install
