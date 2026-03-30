@@ -1,0 +1,116 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "phantom-redteam"
+version = "0.1.0"
+description = "RL-based adversarial red-team agent for LLM systems"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Sushaan Kandukoori" },
+]
+keywords = [
+    "llm",
+    "security",
+    "red-team",
+    "adversarial",
+    "reinforcement-learning",
+    "mitre-atlas",
+    "prompt-injection",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.0,<3.0",
+    "httpx>=0.27,<1.0",
+    "openai>=1.30,<2.0",
+    "numpy>=1.26,<3.0",
+    "torch>=2.2,<3.0",
+    "jinja2>=3.1,<4.0",
+    "typer>=0.12,<1.0",
+    "rich>=13.0,<14.0",
+    "structlog>=24.0,<26.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "pytest-asyncio>=0.23,<1.0",
+    "pytest-cov>=5.0,<6.0",
+    "pytest-mock>=3.14,<4.0",
+    "respx>=0.21,<1.0",
+    "ruff>=0.5,<1.0",
+    "mypy>=1.10,<2.0",
+    "pre-commit>=3.7,<4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sushaankandukoori/phantom"
+Documentation = "https://github.com/sushaankandukoori/phantom#readme"
+Repository = "https://github.com/sushaankandukoori/phantom"
+Issues = "https://github.com/sushaankandukoori/phantom/issues"
+
+[project.scripts]
+phantom = "phantom.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/phantom"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "UP",
+    "ANN",
+    "B",
+    "A",
+    "SIM",
+    "TCH",
+]
+ignore = [
+    "ANN401",
+    "TC001",
+    "TC003",
+    "UP042",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/phantom/atlas/report.py" = ["E501"]
+"src/phantom/attacks/strategies.py" = ["E501"]
+"tests/*" = ["ANN"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["phantom"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "integration: marks tests as integration tests",
+]

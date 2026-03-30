@@ -1,0 +1,200 @@
+{
+  "version": "1.0.0",
+  "source": "MITRE ATLAS (atlas.mitre.org)",
+  "techniques": [
+    {
+      "id": "AML.T0051",
+      "name": "LLM Prompt Injection",
+      "tactic": "Initial Access",
+      "description": "Adversary crafts input to an LLM-integrated application that causes the LLM to take unintended actions.",
+      "subtechniques": [
+        {
+          "id": "AML.T0051.000",
+          "name": "Direct Prompt Injection",
+          "description": "Adversary directly provides a malicious prompt as user input to override system instructions."
+        },
+        {
+          "id": "AML.T0051.001",
+          "name": "Indirect Prompt Injection",
+          "description": "Adversary places malicious content in data sources that the LLM processes, causing unintended behavior."
+        },
+        {
+          "id": "AML.T0051.002",
+          "name": "Multi-Turn Prompt Injection",
+          "description": "Adversary uses a series of interactions to gradually steer the LLM toward unintended behavior."
+        }
+      ],
+      "mitigations": [
+        "Input validation and sanitization",
+        "System prompt hardening",
+        "Output filtering",
+        "Instruction hierarchy enforcement"
+      ],
+      "severity_default": "HIGH",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0051"
+      ]
+    },
+    {
+      "id": "AML.T0054",
+      "name": "LLM Jailbreak",
+      "tactic": "Defense Evasion",
+      "description": "Adversary crafts prompts to bypass safety guardrails and elicit restricted content from the LLM.",
+      "subtechniques": [
+        {
+          "id": "AML.T0054.000",
+          "name": "Goal Hijacking",
+          "description": "Adversary redirects the LLM agent to perform actions outside its intended purpose."
+        },
+        {
+          "id": "AML.T0054.001",
+          "name": "System Prompt Extraction",
+          "description": "Adversary tricks the LLM into revealing its system prompt or internal configuration."
+        },
+        {
+          "id": "AML.T0054.002",
+          "name": "Tool Manipulation",
+          "description": "Adversary causes the LLM to invoke tools with attacker-controlled parameters."
+        }
+      ],
+      "mitigations": [
+        "Multi-layer safety alignment",
+        "System prompt protection",
+        "Tool call validation",
+        "Output monitoring"
+      ],
+      "severity_default": "CRITICAL",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0054"
+      ]
+    },
+    {
+      "id": "AML.T0024",
+      "name": "Exfiltration via ML Inference API",
+      "tactic": "Exfiltration",
+      "description": "Adversary extracts sensitive data through interaction with an ML model's inference API.",
+      "subtechniques": [
+        {
+          "id": "AML.T0024.000",
+          "name": "Training Data Extraction",
+          "description": "Adversary extracts memorized training data from the model through targeted queries."
+        },
+        {
+          "id": "AML.T0024.001",
+          "name": "PII Extraction",
+          "description": "Adversary probes for personally identifiable information memorized by the model."
+        },
+        {
+          "id": "AML.T0024.002",
+          "name": "Configuration Leakage",
+          "description": "Adversary tricks the system into revealing API keys, endpoints, or internal architecture."
+        }
+      ],
+      "mitigations": [
+        "Differential privacy in training",
+        "Output scanning for sensitive data",
+        "Data isolation between sessions",
+        "Rate limiting on inference"
+      ],
+      "severity_default": "HIGH",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0024"
+      ]
+    },
+    {
+      "id": "AML.T0029",
+      "name": "Denial of ML Service",
+      "tactic": "Impact",
+      "description": "Adversary causes degradation or denial of an ML service through targeted inputs.",
+      "subtechniques": [
+        {
+          "id": "AML.T0029.000",
+          "name": "Resource Exhaustion",
+          "description": "Adversary crafts inputs that cause excessive computation, token usage, or API calls."
+        },
+        {
+          "id": "AML.T0029.001",
+          "name": "Infinite Loop Induction",
+          "description": "Adversary triggers recursive tool calls or infinite reasoning loops in LLM agents."
+        },
+        {
+          "id": "AML.T0029.002",
+          "name": "Reputational Damage",
+          "description": "Adversary causes the model to produce harmful, illegal, or embarrassing content."
+        }
+      ],
+      "mitigations": [
+        "Token budget enforcement",
+        "Rate limiting",
+        "Recursion depth limits",
+        "Content safety filters"
+      ],
+      "severity_default": "MEDIUM",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0029"
+      ]
+    },
+    {
+      "id": "AML.T0043",
+      "name": "Craft Adversarial Data",
+      "tactic": "Resource Development",
+      "description": "Adversary creates data designed to exploit weaknesses in ML models.",
+      "subtechniques": [
+        {
+          "id": "AML.T0043.004",
+          "name": "LLM Meta Prompt Extraction",
+          "description": "Adversary designs prompts specifically to reveal the meta-prompt or system configuration."
+        }
+      ],
+      "mitigations": [
+        "Input validation",
+        "Adversarial training",
+        "Model hardening"
+      ],
+      "severity_default": "MEDIUM",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0043"
+      ]
+    },
+    {
+      "id": "AML.T0047",
+      "name": "ML Supply Chain Compromise",
+      "tactic": "Initial Access",
+      "description": "Adversary compromises components of the ML supply chain to gain access.",
+      "subtechniques": [
+        {
+          "id": "AML.T0047.000",
+          "name": "Poisoned Plugin or Tool",
+          "description": "Adversary provides a compromised plugin, tool, or MCP server that the LLM agent uses."
+        }
+      ],
+      "mitigations": [
+        "Supply chain verification",
+        "Tool sandboxing",
+        "Permission boundaries"
+      ],
+      "severity_default": "CRITICAL",
+      "references": [
+        "https://atlas.mitre.org/techniques/AML.T0047"
+      ]
+    }
+  ],
+  "attack_categories": {
+    "prompt_injection": {
+      "techniques": ["AML.T0051", "AML.T0051.000", "AML.T0051.001", "AML.T0051.002"],
+      "description": "Attacks that manipulate LLM behavior through crafted inputs"
+    },
+    "goal_hijacking": {
+      "techniques": ["AML.T0054", "AML.T0054.000", "AML.T0054.001", "AML.T0054.002"],
+      "description": "Attacks that redirect the LLM to perform unintended actions"
+    },
+    "data_exfiltration": {
+      "techniques": ["AML.T0024", "AML.T0024.000", "AML.T0024.001", "AML.T0024.002"],
+      "description": "Attacks that extract sensitive data from the system"
+    },
+    "denial_of_service": {
+      "techniques": ["AML.T0029", "AML.T0029.000", "AML.T0029.001", "AML.T0029.002"],
+      "description": "Attacks that degrade or deny service availability"
+    }
+  }
+}
